@@ -128,6 +128,14 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
           <div class="suggest-list" id="suggest-congdoan" style="display:none"></div>
           <div class="cd-display" id="cd-display"></div>
         </div>
+         <div class="field">
+          <label>Mã hàng của chuyền:</label>
+          <select id="inp-chuyen" onchange="onChuyenChange()">
+            <option value="">— Chọn chuyền —</option>
+            <option>Chuyền 1</option><option>Chuyền 2</option>
+            <option>Chuyền 3</option><option>Chuyền 4</option><option>Chuyền 5</option>
+          </select>
+        </div>
         <div class="field">
           <label>Năng suất (sp/ngày)</label>
           <input type="number" id="inp-nangsuit" placeholder="0" min="0" inputmode="numeric" />
