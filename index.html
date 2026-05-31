@@ -122,19 +122,19 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
           <div class="suggest-list" id="suggest-mahang" style="display:none"></div>
         </div>
         <div class="field">
+          <label>Đơn Hàng Chuyền:</label>
+          <select id="inp-mahang-chuyen">
+            <option value="">— Cùng chuyền —</option>
+            <option>Chuyền 1</option><option>Chuyền 2</option>
+            <option>Chuyền 3</option><option>Chuyền 4</option><option>Chuyền 5</option>
+          </select>
+        </div>
+        <div class="field">
           <label>Số công đoạn</label>
           <input type="text" id="inp-congdoan" placeholder="Chọn mã hàng trước..." disabled autocomplete="off"
             oninput="onCongDoanInput()" onblur="hideSuggest('suggest-congdoan')" onfocus="onCongDoanInput()" />
           <div class="suggest-list" id="suggest-congdoan" style="display:none"></div>
           <div class="cd-display" id="cd-display"></div>
-        </div>
-         <div class="field">
-          <label>Mã hàng của chuyền:</label>
-          <select id="inp-chuyen" onchange="onChuyenChange()">
-            <option value="">— Chọn chuyền —</option>
-            <option>Chuyền 1</option><option>Chuyền 2</option>
-            <option>Chuyền 3</option><option>Chuyền 4</option><option>Chuyền 5</option>
-          </select>
         </div>
         <div class="field">
           <label>Năng suất (sp/ngày)</label>
@@ -362,6 +362,8 @@ async function saveRecord(){
   const ngay=document.getElementById('inp-ngay').value||new Date().toISOString().split('T')[0];
   const socongdoan=selectedCD?selectedCD.so:(parseInt(document.getElementById('inp-congdoan').value)||0);
   const tencongdoan=selectedCD?selectedCD.ten:'';
+  // Lấy chuyền của mã hàng: nếu không chọn thì dùng chuyền của công nhân
+  const mahangChuyen=document.getElementById('inp-mahang-chuyen').value||chuyen;
 
   if(!chuyen){showToast('Vui lòng chọn chuyền!','error');return}
   if(!ten){showToast('Vui lòng nhập họ và tên!','error');return}
@@ -373,10 +375,11 @@ async function saveRecord(){
   setStatus('Đang lưu...');
   try{
     await fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action:'nangsuit',ten,chuyen,mahang,socongdoan,tencongdoan,nangsuit,ngay})});
+      body:JSON.stringify({action:'nangsuit',ten,chuyen,mahang,mahangChuyen,socongdoan,tencongdoan,nangsuit,ngay})});
     showToast('Đã lưu thành công!');setStatus('Đã đồng bộ ✓');
     document.getElementById('inp-ten').value='';
     document.getElementById('inp-mahang').value='';
+    document.getElementById('inp-mahang-chuyen').value='';
     document.getElementById('inp-nangsuit').value='';
     document.getElementById('inp-ngay').value=new Date().toISOString().split('T')[0];
     resetCongDoan();
@@ -389,7 +392,7 @@ async function loadBaoCao(){
   setStatus('Đang tải...');
   try{
     const rows=await fetchData(SHEET_URL+'?t='+Date.now());
-    records=rows.length<=1?[]:rows.slice(1).map(r=>({ten:r[0]||'',chuyen:r[1]||'',nangsuit:parseInt(r[5])||0}));
+    records=rows.length<=1?[]:rows.slice(1).map(r=>({ten:r[0]||'',chuyen:r[1]||'',nangsuit:parseInt(r[6])||0}));
     renderReport();setStatus('Đã đồng bộ ✓');
   }catch(e){setStatus('Lỗi tải')}
 }
