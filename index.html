@@ -359,15 +359,46 @@ async function saveRecord(){
   const chuyen=document.getElementById('inp-chuyen').value;
   const mahang=document.getElementById('inp-mahang').value.trim();
   const nangsuit=parseInt(document.getElementById('inp-nangsuit').value)||0;
-  const ngay=document.getElementById('inp-ngay').value||new Date().toISOString().split('T')[0];
+  const ngay=document.getElementById('inp-ngay').value;
   const socongdoan=selectedCD?selectedCD.so:(parseInt(document.getElementById('inp-congdoan').value)||0);
   const tencongdoan=selectedCD?selectedCD.ten:'';
   // Lấy chuyền của mã hàng: nếu không chọn thì dùng chuyền của công nhân
   const mahangChuyen=document.getElementById('inp-mahang-chuyen').value||chuyen;
 
-  if(!chuyen){showToast('Vui lòng chọn chuyền!','error');return}
-  if(!ten){showToast('Vui lòng nhập họ và tên!','error');return}
-  if(!mahang){showToast('Vui lòng nhập mã hàng!','error');return}
+if(!chuyen){
+  showToast('Vui lòng chọn chuyền!','error');
+  return;
+}
+
+if(!ten){
+  showToast('Vui lòng nhập họ và tên!','error');
+  return;
+}
+
+if(!mahang){
+  showToast('Vui lòng nhập mã hàng!','error');
+  return;
+}
+
+if(!mahangChuyen){
+  showToast('Vui lòng chọn đơn hàng chuyền!','error');
+  return;
+}
+
+if(!socongdoan){
+  showToast('Vui lòng chọn công đoạn!','error');
+  return;
+}
+
+if(!document.getElementById('inp-nangsuit').value){
+  showToast('Vui lòng nhập năng suất!','error');
+  return;
+}
+
+if(!ngay){
+  showToast('Vui lòng chọn ngày làm!','error');
+  return;
+}
 
   const btn=document.getElementById('btn-save');
   btn.disabled=true;
