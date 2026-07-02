@@ -125,17 +125,18 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
             oninput="onMaHangInput()" onblur="hideSuggest('suggest-mahang')" onfocus="onMaHangInput()" />
           <div class="suggest-list" id="suggest-mahang" style="display:none"></div>
         </div>
-        <div class="field">
-          <label>Đơn Hàng Chuyền:</label>
-          <select id="inp-chuyen" onchange="onChuyenChange()">
-                <option value="">— Chọn chuyền —</option>
-                <option>Chuyền 1</option>
-                <option>Chuyền 2</option>
-                <option>Chuyền 3</option>
-                <option>Chuyền 4</option>
-                <option>Chuyền 5</option>
-          </select>
-        </div>
+       <div class="field">
+  <label>Đơn Hàng Chuyền:</label>
+  <select id="inp-mahang-chuyen">
+    <option value="">— Cùng chuyền —</option>
+    <option>Chuyền 1</option>
+    <option>Chuyền 2</option>
+    <option>Chuyền 3</option>
+    <option>Chuyền 4</option>
+    <option>Chuyền 5</option>
+    <option>TV</option>
+  </select>
+</div>
         <div class="field">
           <label>Số công đoạn</label>
           <input type="text" id="inp-congdoan" placeholder="Chọn mã hàng trước..." disabled autocomplete="off"
@@ -204,11 +205,15 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
           <div class="card-title">Thêm nhân viên</div>
           <div class="field">
             <label>Bộ phận / Chuyền *</label>
-            <select id="add-chuyen">
-              <option value="">— Chọn chuyền —</option>
-              <option>Chuyền 1</option><option>Chuyền 2</option>
-              <option>Chuyền 3</option><option>Chuyền 4</option><option>Chuyền 5</option>
-            </select>
+          <select id="add-chuyen">
+  <option value="">— Chọn chuyền —</option>
+  <option>Chuyền 1</option>
+  <option>Chuyền 2</option>
+  <option>Chuyền 3</option>
+  <option>Chuyền 4</option>
+  <option>Chuyền 5</option>
+  <option>TV</option>
+</select>
           </div>
           <div class="field">
             <label>Họ và tên *</label>
