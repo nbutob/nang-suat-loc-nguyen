@@ -123,10 +123,14 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
         </div>
         <div class="field">
           <label>Đơn Hàng Chuyền:</label>
-          <select id="inp-mahang-chuyen">
-            <option value="">— Cùng chuyền —</option>
-            <option>Chuyền 1</option><option>Chuyền 2</option>
-            <option>Chuyền 3</option><option>Chuyền 4</option><option>Chuyền 5</option>
+          <select id="inp-chuyen" onchange="onChuyenChange()">
+                <option value="">— Chọn chuyền —</option>
+                <option>Chuyền 1</option>
+                <option>Chuyền 2</option>
+                <option>Chuyền 3</option>
+                <option>Chuyền 4</option>
+                <option>Chuyền 5</option>
+                <option>TV</option>
           </select>
         </div>
         <div class="field">
